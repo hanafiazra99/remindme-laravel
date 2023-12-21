@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+  laravel-app:
+    build:
+      context: '.'
+      args:
+        uid: ${UID}
+    container_name: reminder
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8000:80
+    networks:
+      backend:
+        aliases:
+          - laravel-app
+
+  mysql-db:
+    image: mariadb:latest
+    container_name: mysql-db
+    volumes:
+      - ./run/var:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=reminder
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+    networks:
+      backend:
+        aliases:
+          - db
+
+networks:
+  backend:
+    name: backend-network
