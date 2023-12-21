@@ -24,6 +24,3 @@ COPY laravel.conf /etc/apache2/conf-available/
 RUN a2enconf laravel.conf
 RUN a2ensite laravel.conf
 RUN service apache2 restart
-
-
-

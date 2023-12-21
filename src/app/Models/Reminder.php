@@ -21,11 +21,11 @@ class Reminder extends Model
     protected $appends = ['remind_at_label','event_at_label'];
 
     public function getRemindAtLabelAttribute(){
-        return Carbon::createFromTimestamp($this->attributes['remind_at'])->translatedFormat('F Y');
+        return Carbon::createFromTimestamp($this->attributes['remind_at'])->translatedFormat('l,d F Y H:i:s');
         
     }
     public function getEventAtLabelAttribute(){
-        return Carbon::createFromTimestamp($this->attributes['event_at'])->translatedFormat('F Y');
+        return Carbon::createFromTimestamp($this->attributes['event_at'])->translatedFormat('l,d F Y H:i:s');
         
     }
 

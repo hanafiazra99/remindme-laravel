@@ -2,7 +2,7 @@
 
 namespace App\Presenters;
 
-use App\Http\Requests\ReminderRequest;
+use App\Http\Requests\Api\ReminderRequest;
 use App\Jobs\SendReminderJob;
 use App\Models\Reminder;
 use App\Views\ReminderView;
@@ -25,7 +25,7 @@ class ReminderPresenter{
         }
         $offset = ($current_page-1)*$count;
         
-        $data['reminders'] = Reminder::select('id','title','description','remind_at','event_at')->where('user_id',auth('api')->user()->id)->where('schedule_id','!=',0)->skip($offset)->take($count)->get();
+        $data['reminders'] = Reminder::select('id','title','description','remind_at','event_at')->where('user_id',auth('api')->user()->id)->skip($offset)->take($count)->get();
         $data['limit'] = $count;
         return $this->view->success_fetch_all($data);
     }
@@ -37,6 +37,8 @@ class ReminderPresenter{
     }
 
     public function store(ReminderRequest $request){
+        
+        
         
         $data = Reminder::create([
             'title'=> $request->title,

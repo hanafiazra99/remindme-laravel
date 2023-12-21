@@ -15,12 +15,14 @@ services:
       backend:
         aliases:
           - laravel-app
+    depends_on:
+      - mysql-db
 
   mysql-db:
     image: mariadb:latest
     container_name: mysql-db
-    volumes:
-      - ./run/var:/var/lib/mysql
+    ports:
+      - 3306:3306
     environment:
       - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=reminder

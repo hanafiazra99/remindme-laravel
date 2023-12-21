@@ -26,6 +26,7 @@ class RemindUser extends Command
      */
     protected $reminder_presenter;
      public function __construct(ReminderPresenter $reminder_presenter) {
+        parent::__construct();
         $this->reminder_presenter = $reminder_presenter;
      }
     public function handle()
